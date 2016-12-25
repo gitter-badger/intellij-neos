@@ -1,10 +1,11 @@
 <idea-plugin version="2">
-  <id>vette.neos</id>
+  <id>de.vette.intellij.neos</id>
   <name>Neos Support</name>
-  <version>0.1</version>
+
+  <vendor url="https://github.com/cvette/intellij-neos"/>
 
   <description><![CDATA[
-    <p>Support for Neos.</p>
+    <p>Support for the <a href="https://www.neos.io">Neos CMS</a>.</p>
     <br/>
     <p>
       <b>Features</b>
@@ -12,7 +13,13 @@
         <li>Fusion/TypoScript2 language support
           <ul>
             <li>Syntax Highlighting</li>
-            <li>Formatting</li>
+            <li>Basic Formatting</li>
+            <li>Brace Matching</li>
+          </ul>
+        </li>
+        <li>Node type definition YAML support
+          <ul>
+            <li>Completion for configuration keys</li>
           </ul>
         </li>
       </ul>
@@ -42,8 +49,9 @@
     <colorSettingsPage implementation="de.vette.idea.neos.lang.fusion.pages.FusionColorSettingsPage"/>
     <codeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionCodeStyleSettingsProvider" />
     <langCodeStyleSettingsProvider implementation="de.vette.idea.neos.lang.fusion.formatter.FusionLanguageCodeStyleSettingsProvider"/>
-
+    <fileBasedIndex implementation="de.vette.idea.neos.indexes.EelHelperFileIndex"/>
     <completion.contributor language="yaml" implementationClass="de.vette.idea.neos.config.yaml.YamlCompletionContributor"/>
+    <psi.referenceContributor implementation="de.vette.idea.neos.lang.fusion.references.EelHelperReferenceContributor"/>
   </extensions>
 
   <project-components>
@@ -51,11 +59,6 @@
       <implementation-class>de.vette.idea.neos.NeosProjectComponent</implementation-class>
     </component>
   </project-components>
-
-
-  <actions>
-    <!-- Add your actions here -->
-  </actions>
 
   <depends>org.jetbrains.plugins.yaml</depends>
   <depends>com.intellij.modules.platform</depends>

@@ -31,11 +31,12 @@ apply plugin: 'idea'
 apply plugin: 'org.jetbrains.intellij'
 apply plugin: 'java'
 
-version "$version-$buildNumber"
+version "$version.$buildNumber"
 
 sourceCompatibility = javaVersion
 targetCompatibility = javaVersion
 
+tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 sourceSets {
     main.java.srcDirs += 'src/gen'
 }
@@ -45,6 +46,7 @@ intellij {
     pluginName 'neos-intellij-plugin'
     updateSinceUntilBuild false
     downloadSources Boolean.valueOf(downloadIdeaSources)
+    alternativeIdePath '/opt/PhpStorm-145.258.2'
     type = 'IU'
     plugins = ['yaml']
 }
